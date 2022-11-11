@@ -4,9 +4,9 @@ import Final from './tutorial/1-useState/final/5-useState-counter'
 
 function App() {
   return (
-    <>
-      <section></section>
-    </>
+    <div className='container'>
+      <Setup />
+    </div>
   )
 }
 
