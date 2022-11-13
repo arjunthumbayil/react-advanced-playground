@@ -1,6 +1,6 @@
 import React from "react";
-import Setup from "./tutorial/3-conditional-rendering/setup/1-multiple-returns";
-import Final from "./tutorial/3-conditional-rendering/final/1-multiple-returns";
+import Setup from "./tutorial/4-forms/setup/1-controlled-inputs";
+import Final from "./tutorial/4-forms/final/1-controlled-inputs";
 
 function App() {
   return (
