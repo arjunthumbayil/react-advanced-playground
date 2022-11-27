@@ -4,12 +4,30 @@ import { data } from "../../../data";
 // reducer function
 
 const Index = () => {
-  const reducer = (state, action) => {};
+  const reducer = (state, action) => {
+    if (action.type === "ADD_ITEM") {
+      const newPeople = [...state.people, action.payload];
+      return {
+        ...state,
+        people: newPeople,
+        isModalOpen: true,
+        modalContent: "Item Added",
+      };
+    }
+    if (action.type === "NO_VALUE") {
+      return {
+        ...state,
+        isModalOpen: true,
+        modalContent: "Please enter Value",
+      };
+    }
+    throw new Error("no matching action type");
+  };
 
   const defaultState = {
-    people: data,
-    isModalOpen: true,
-    modalContent: "Hello World",
+    people: [],
+    isModalOpen: false,
+    modalContent: "",
   };
   const [name, setName] = useState("");
 
@@ -19,9 +37,14 @@ const Index = () => {
     e.preventDefault();
     console.log(name + " this is coming from the input");
     if (name) {
+      const newItem = { id: new Date().getDate().toString(), name };
+      dispatch({ type: "ADD_ITEM", payload: newItem });
+      setName("");
     } else {
+      dispatch({ type: "NO_VALUE" });
     }
   };
+
   return (
     <>
       {state.isModalOpen && <Modal modalContent={state.modalContent} />}
