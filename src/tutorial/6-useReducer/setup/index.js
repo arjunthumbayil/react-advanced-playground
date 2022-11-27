@@ -4,24 +4,27 @@ import { data } from "../../../data";
 // reducer function
 
 const Index = () => {
+  const reducer = (state, action) => {};
+
+  const defaultState = {
+    people: data,
+    isModalOpen: true,
+    modalContent: "Hello World",
+  };
   const [name, setName] = useState("");
-  const [people, setPeople] = useState(data);
-  const [showModal, setShowModal] = useState(false);
+
+  const [state, dispatch] = useReducer(reducer, defaultState);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(name + " this is coming from the input");
     if (name) {
-      setShowModal(false);
-      setPeople([...people, { id: new Date().getTime().toString(), name }]);
-      setName("");
     } else {
-      setShowModal(true);
     }
   };
   return (
     <>
-      {showModal && <Modal />}
+      {state.isModalOpen && <Modal modalContent={state.modalContent} />}
       <form onSubmit={handleSubmit} className="form">
         <div>
           <input
@@ -32,7 +35,7 @@ const Index = () => {
         </div>
         <button type="submit">Add_Item</button>
       </form>
-      {people.map((person) => {
+      {state.people.map((person) => {
         return (
           <div key={person.id}>
             <h4>{person.name}</h4>
